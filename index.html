@@ -15,7 +15,7 @@
 
 <body>
     <div class="quiz-container" id="quiz">
-        <div id="question" class="quiz-header animate__animated animate__bounce"></div>
+        <div id="question" class="quiz-header animate__animated animate__bounce" ></div>
         <ul>
             <li>
                 <input type="radio" id="a" value="a" name="answer" />
@@ -36,14 +36,14 @@
         </ul>
         <button id="submit" style="margin-bottom:0px;">Submit</button>
     </div>
-    <div class="quiz-container " id="result" style="width:300px; height: auto; display: none;">
+    <div class="quiz-container " id="result" style="display: none;">
         <h1 class="animate__animated animate__tada" style="text-align:center;margin:20px; color:white">Your score is <span id="score-text"></span></h1>
         <button class="animate__animated animate__backInDown" id="restart">Restart</button>
 
     </div>
 
 
-    <script src="main.js"></script>
+    <script type="module" src="main.js"></script>
 </body>
 
 </html>

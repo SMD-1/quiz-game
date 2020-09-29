@@ -1,48 +1,4 @@
-const quizData = [
-    {
-        question: 'what is cube of 7?',
-        a: '343',
-        b: '345',
-        c: '350',
-        d: '349',
-        correct: 'a'
-    }, {
-        question: 'who is the president of india?',
-        a: 'Manmohan SIngh',
-        b: 'narendra modi',
-        c: 'Ram nath govind',
-        d: 'None of the Above',
-        correct: 'c'
-    }, {
-        question: 'The 7th Element in the periodic table is?',
-        a: 'Carbon',
-        b: 'Boron',
-        c: 'Oxygen',
-        d: 'Nitrogen',
-        correct: 'd'
-    }, {
-        question: 'anynumber raised to the power of zero is?',
-        a: '1',
-        b: 'infinity',
-        c: '0',
-        d: 'Not define',
-        correct: 'a'
-    }, {
-        question: '2 + 9 * 3 = ? ',
-        a: '33',
-        b: '21',
-        c: '44',
-        d: '29',
-        correct: 'd'
-    }, {
-        question: 'champion of ICC world cup 2019?',
-        a: 'INDIA',
-        b: 'ENGLAND',
-        c: 'AUSTRALIA',
-        d: 'NEW ZEALAND',
-        correct: 'b'
-    }
-];
+import quizData from './questions.js'
 
 const questionEl = document.getElementById('question');
 const a_text = document.getElementById('a_text');
@@ -57,6 +13,18 @@ let currentQuiz = 0;
 let userOptions = []
 let userScore = 0
 
+console.log(quizData)
+
+function isValidate() {
+    if (!document.getElementById('a').checked &&
+        !document.getElementById('b').checked &&
+        !document.getElementById('c').checked &&
+        !document.getElementById('d').checked) {
+        alert("Please select an option pleaseeeeeeeeeeeeeeeeeeeeeee!")
+        return false
+    }
+    return true
+}
 
 loadQuiz();
 function loadQuiz() {
@@ -69,35 +37,42 @@ function loadQuiz() {
 }
 
 submitBtn.addEventListener("click", () => {
-    if (document.getElementById('a').checked)
-        userOptions.push('a')
-    else if (document.getElementById('b').checked)
-        userOptions.push('b')
-    else if (document.getElementById('c').checked)
-        userOptions.push('c')
-    else if (document.getElementById('d').checked)
-        userOptions.push('d')
-    if (currentQuiz < quizData.length) {
-        loadQuiz();
-        currentQuiz++;
-    }
-    else{
-        // alert('all finished')
-        for(var i =0;i<quizData.length;i++) {
-            if(userOptions[i] == quizData[i].correct){
-                userScore++
+    if(isValidate()) {
 
+        if (document.getElementById('a').checked)
+            userOptions.push('a')
+        else if (document.getElementById('b').checked)
+            userOptions.push('b')
+        else if (document.getElementById('c').checked)
+            userOptions.push('c')
+        else if (document.getElementById('d').checked)
+            userOptions.push('d')
+
+        document.getElementById('a').checked = false
+        document.getElementById('b').checked = false
+        document.getElementById('c').checked = false
+        document.getElementById('d').checked = false
+
+        if (currentQuiz < quizData.length - 1) {
+            currentQuiz++;
+            loadQuiz();
+        } else {
+            // alert('all finished')
+            for (var i = 0; i < quizData.length; i++) {
+                if (userOptions[i] == quizData[i].correct) {
+                    userScore++
+                }
+                console.log(userOptions[i] + ' - ' + quizData[i].correct)
             }
-        }
-        console.log('score is ' + userScore)
-        document.getElementById('score-text').innerText = userScore
-        document.getElementById('quiz').style.display = 'none'
-        document.getElementById('result').style.display = 'block'
+            console.log('score is ' + userScore)
+            document.getElementById('score-text').innerText = userScore
+            document.getElementById('quiz').style.display = 'none'
+            document.getElementById('result').style.display = 'block'
 
+        }
     }
 });
 restartBtn.addEventListener("click", () => {
 
     window.location.reload()
-})
-
+});
